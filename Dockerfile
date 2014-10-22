@@ -37,11 +37,10 @@ RUN mkdir -p /var/simplesamlphp/cert && openssl req -x509 -batch -nodes -newkey 
 
 ####################
 # Composer
-RUN echo "extension=mcrypt.so" >> /etc/php5/cli/php.ini
-RUN echo "extension=mcrypt.so" >>  /etc/php5/mods-available/mcrypt.ini
 RUN php5enmod mcrypt
 WORKDIR /var/simplesamlphp
 RUN curl -sS https://getcomposer.org/installer | php
+RUN php composer.phar update 
 RUN php composer.phar install
 
 ####################
