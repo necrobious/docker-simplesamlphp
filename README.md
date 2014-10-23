@@ -20,7 +20,7 @@ machine. All software will be installed and once completed SimpleSAMLphp will
 be ready to use.
 
 ``` bash
-git clone https://github.com/jnyryan/docker-simplesamlphp.git
+git clone https://github.com/necrobious/docker-simplesamlphp.git
 cd docker-simplesamlphp
 vagrant up
 vagrant ssh
@@ -35,8 +35,8 @@ From the host machine the following ports are forwarded to the Vagrant VM.
 
 To get to either the HTTP or HTTPS setup hit the following endpoints:
 
-  - http://localhost:58080/simplesaml
-  - https://localhost:58443/simplesaml
+  - http://localhost:58080/simplesamlphp
+  - https://localhost:58443/simplesamlphp
 
 To access simpleSAMLphp from the browser:
 
@@ -65,20 +65,20 @@ setup, the details are included if you would like to further develop it.
 
 ## Install from DockerHub
 
-Rather than build it yourself, the full container is available on [DockerHub](https://registry.hub.docker.com/u/jnyryan/simplesamlphp/)
+Rather than build it yourself, the full container is available on [DockerHub](https://registry.hub.docker.com/u/necrobious/simplesamlphp/)
 
 ``` bash
-sudo docker pull jnyryan/simplesamlphp
-sudo docker run -d -p 58080:80 -p 58443:443 jnyryan/simplesamlphp
+sudo docker pull necrobious/simplesamlphp
+sudo docker run -d -p 58080:80 -p 58443:443 necrobious/simplesamlphp
 ```
 
 To access simpleSAMLphp from the host server:
 
 ```
-http://localhost:50081/simplesaml/
+http://localhost:50081/simplesamlphp/
 
 username: admin
-password: password
+password: <stored in /var/lib/simplesamlphp/secrets.inc.php> 
 
 ```
 
@@ -87,7 +87,7 @@ To use your own configs stored on the host in /var/simplesamlphp
 ``` bash
 sudo docker run -d -p 58080:80 -p 58443:443 \
 -v /var/simplesamlphp/config/:/var/simplesamlphp/config/ -v /var/simplesamlphp/metadata/:/var/simplesamlphp/metadata/ -v /var/simplesamlphp/cert/:/var/simplesamlphp/cert/ \
-jnyryan/simplesamlphp
+necrobious/simplesamlphp
 ```˛
 
 ## Build the Package and Publish it to Dockerhub
@@ -96,9 +96,9 @@ Build the package locally and push it to dockerhub
 
 ``` bash
 sudo docker login
-sudo docker pull jnyryan/simplesamlphp
-sudo docker build -t jnyryan/simplesamlphp /vagrant/.
-sudo docker push jnyryan/simplesamlphp
+sudo docker pull necrobious/simplesamlphp
+sudo docker build -t necrobious/simplesamlphp /vagrant/.
+sudo docker push necrobious/simplesamlphp
 ```
 
 ### Cleanup
@@ -115,6 +115,7 @@ exit
 ```
 
 ### References
+[Forked from original jnyryan/docker-simplesamlphp project to use Ubuntu's packaged SimpleSAMLphp rather than latest from github](https://github.com/jnyryan/docker-simplesamlphp)
 
 [simpleSAMLphp Installation and Configuration](https://simplesamlphp.org/docs/stable/simplesamlphp-install)
 
